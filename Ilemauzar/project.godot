@@ -1,0 +1,199 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Control",
+"class": "DebugButton",
+"language": "GDScript",
+"path": "res://Source/DebugMenu/ItemTypes/DebugButton.gd"
+}, {
+"base": "Control",
+"class": "DebugDataStructButton",
+"language": "GDScript",
+"path": "res://Source/DebugMenu/ItemTypes/DebugDataStructButton.gd"
+}, {
+"base": "Node",
+"class": "DebugItem",
+"language": "GDScript",
+"path": "res://Source/DebugMenu/DebugItem.gd"
+}, {
+"base": "Node",
+"class": "DebugItemArray",
+"language": "GDScript",
+"path": "res://Source/DebugMenu/DebugItemArray.gd"
+}, {
+"base": "Node",
+"class": "DebugItemDataGetter",
+"language": "GDScript",
+"path": "res://Source/DebugMenu/DebugItemDataGetter.gd"
+}, {
+"base": "Control",
+"class": "DebugItemGroup",
+"language": "GDScript",
+"path": "res://Source/DebugMenu/ItemTypes/DebugItemGroup.gd"
+}, {
+"base": "Reference",
+"class": "DebugItemType",
+"language": "GDScript",
+"path": "res://Source/DebugMenu/ItemTypes/DebugItemType.gd"
+}, {
+"base": "Control",
+"class": "DebugMenu",
+"language": "GDScript",
+"path": "res://Source/DebugMenu/debug_menu.gd"
+}, {
+"base": "Label",
+"class": "DebugMenuTitle",
+"language": "GDScript",
+"path": "res://Source/DebugMenu/ItemTypes/DebugMenuTitle.gd"
+}, {
+"base": "Control",
+"class": "DebugTextInput",
+"language": "GDScript",
+"path": "res://Source/DebugMenu/ItemTypes/DebugTextInput.gd"
+}, {
+"base": "Control",
+"class": "DebugTextInputButton",
+"language": "GDScript",
+"path": "res://Source/DebugMenu/ItemTypes/DebugTextInputButton.gd"
+}, {
+"base": "Control",
+"class": "DebugToggle",
+"language": "GDScript",
+"path": "res://Source/DebugMenu/ItemTypes/DebugToggle.gd"
+}, {
+"base": "Reference",
+"class": "DictionaryParse",
+"language": "GDScript",
+"path": "res://dictionary_parse.gd"
+}, {
+"base": "Node2D",
+"class": "Grid",
+"language": "GDScript",
+"path": "res://Source/RoomGeneration/Grid.gd"
+}, {
+"base": "Node",
+"class": "IntRange",
+"language": "GDScript",
+"path": "res://IntRange.gd"
+}, {
+"base": "Node",
+"class": "JSONParse",
+"language": "GDScript",
+"path": "res://json_parse.gd"
+}, {
+"base": "Area2D",
+"class": "MyRoom",
+"language": "GDScript",
+"path": "res://Source/RoomGeneration/MyRoom.gd"
+}, {
+"base": "Node",
+"class": "MyRoomArray",
+"language": "GDScript",
+"path": "res://Source/RoomGeneration/MyRoomArray.gd"
+}, {
+"base": "Node",
+"class": "NotNeighbourMap",
+"language": "GDScript",
+"path": "res://Source/RoomGeneration/NeighbourMap.gd"
+}, {
+"base": "Node",
+"class": "RoomHelper",
+"language": "GDScript",
+"path": "res://Source/RoomGeneration/RoomHelper.gd"
+} ]
+_global_script_class_icons={
+"DebugButton": "",
+"DebugDataStructButton": "",
+"DebugItem": "",
+"DebugItemArray": "",
+"DebugItemDataGetter": "",
+"DebugItemGroup": "",
+"DebugItemType": "",
+"DebugMenu": "",
+"DebugMenuTitle": "",
+"DebugTextInput": "",
+"DebugTextInputButton": "",
+"DebugToggle": "",
+"DictionaryParse": "",
+"Grid": "",
+"IntRange": "",
+"JSONParse": "",
+"MyRoom": "",
+"MyRoomArray": "",
+"NotNeighbourMap": "",
+"RoomHelper": ""
+}
+
+[application]
+
+config/name="Ilemauzar"
+run/main_scene="res://Main.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+GlobalSignal="*res://global_signal.gd"
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[input]
+
+debug_menu={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":16777220,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+view_pan_mouse={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+view_pan_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+view_pan_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+view_pan_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+view_pan_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+view_zoom_in={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+view_zoom_out={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+left_click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[physics]
+
+common/enable_pause_aware_picking=true

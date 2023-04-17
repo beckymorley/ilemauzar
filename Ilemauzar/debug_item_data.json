@@ -1,0 +1,81 @@
+{"debug_items":
+	[
+		{
+			"name" : "grid_show",
+			"description" : "Show Grids",
+			"type" : "TICKBOX",
+			"default": false
+		},
+		{
+			"name" : "collision_show",
+			"description" : "Show Collisions",
+			"type" : "TICKBOX",
+			"default": false
+		},
+		{	
+			"name" : "radius_show",
+			"description" : "Show Spawn Radius",
+			"type" : "TICKBOX",
+			"default": false
+		},
+		{
+			"name" : "room_generator_options",
+			"description": "Room Generation", 
+			"type" : "ITEM_GROUP", 
+			"default" : true
+		},
+		{
+			"name" :  "room_generator_mean_width",
+			"description" : "Mean Width",
+			"type" : "TEXT_INPUT",
+			"default" : 15,
+			"parent_id" : "room_generator_generate_rooms"
+		},
+		{
+			"name" :  "room_generator_mean_height",
+			"description" : "Mean Height",
+			"type" : "TEXT_INPUT",
+			"default" : 15,
+			"parent_id" : "room_generator_generate_rooms"
+		},
+		{
+			"name" :  "room_generator_width_variance",
+			"description" : "Width Variance",
+			"type" : "TEXT_INPUT",
+			"default" : 10,
+			"parent_id" : "room_generator_generate_rooms"
+		},
+		{
+			"name" :  "room_generator_height_variance",
+			"description" : "Height Variance",
+			"type" : "TEXT_INPUT",
+			"default" : 10,
+			"parent_id" : "room_generator_generate_rooms"
+		},
+		{
+			"name" :  "room_generator_room_count",
+			"description" : "Number of Rooms",
+			"type" : "TEXT_INPUT",
+			"default" : 50,
+			"parent_id" : "room_generator_generate_rooms"
+		},		
+		{
+			"name" :  "room_generator_generate_rooms",
+			"description" : "Generate Rooms",
+			"type" : "TEXT_INPUT_STRUCT_BUTTON",
+			"default" : null
+		},
+		{
+			"name" : "separate_rooms",
+			"description" : "Separate Rooms",
+			"type" : "BUTTON",
+			"default" : null
+		},
+		{
+			"name" : "clear_rooms",
+			"description" : "Clear Rooms",
+			"type" : "BUTTON",
+			"default" : null
+		}
+	]
+}

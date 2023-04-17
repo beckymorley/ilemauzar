@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Source/RoomGeneration/RoomGeneration.gd" type="Script" id=1]
+[ext_resource path="res://Source/DebugMenu/debug_menu.gd" type="Script" id=2]
+[ext_resource path="res://Source/DebugMenu/DebugItemDataGetter.gd" type="Script" id=3]
+[ext_resource path="res://Camera2D.gd" type="Script" id=4]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.376471, 0.745098, 0.666667, 0.615686 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="RoomGenerator" type="Node2D" parent="."]
+position = Vector2( -12, 1 )
+script = ExtResource( 1 )
+Radius = 50
+RoomFillColour = Color( 0.227451, 0.25098, 0.411765, 1 )
+CellSize = 8
+MeanWidth = 15
+MeanHeight = 15
+
+[node name="ParseDebug" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 512, 299 )
+script = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DebugMenu" type="Control" parent="CanvasLayer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 10.0
+margin_bottom = 10.0
+script = ExtResource( 2 )
+menu_position = Vector2( 100, 100 )
+menu_colour = Color( 0.376471, 0.745098, 0.666667, 0.615686 )
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/DebugMenu"]
+material = SubResource( 2 )
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/DebugMenu/PanelContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/DebugMenu/PanelContainer/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 40.0
+margin_bottom = 40.0
