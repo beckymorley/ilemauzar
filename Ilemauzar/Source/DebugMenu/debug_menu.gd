@@ -146,7 +146,6 @@ func compare_parent_value_to_string(a, b):
 func compare_children_values_to_string(a, b):
 	return a["children"].has(b)
 
-	
 func compare_debug_id_to_string(a, b):
 	return a == b.debug_id
 
@@ -175,12 +174,10 @@ func remove_child_from_cache(child_id : String):
 	
 	var dict_idx = child_item_dict.bsearch_custom(child_id, self, "compare_children_values_to_string")
 	if(dict_idx >=0 && dict_idx <= child_item_dict.size()):
-		var dict_item = child_item_dict[dict_idx-1]		
+		var dict_item = child_item_dict[dict_idx-1]
 		if(dict_item):
 			var child_idx = dict_item["children"].find(child_id)
 			dict_item["children"].remove(child_idx)
-				
-		
 
 func get_child_items(parent_id : String): 
 	var result = child_item_dict.bsearch_custom(parent_id, self, "compare_key_to_string", true)
