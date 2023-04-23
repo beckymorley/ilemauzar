@@ -13,7 +13,7 @@ export(Color) var RoomOutlineColour
 var RoomHeightRange
 var RoomWidthRange
 
-export(int) var CellSize
+const CellSize = RoomHelper.cell_size
 
 export(int) var MeanWidth
 export(int) var MeanHeight

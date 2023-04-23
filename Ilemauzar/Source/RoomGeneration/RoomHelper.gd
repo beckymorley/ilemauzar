@@ -2,10 +2,7 @@ extends Node
 
 class_name RoomHelper
 
-static func cell_size():
-	#make this global
-	return 8
-	
+const cell_size = 8
 	
 static func get_collision_rect(in_room : MyRoom) -> Rect2:
 	var position = in_room.position
@@ -25,7 +22,7 @@ static func get_intersecting_rooms(in_room : MyRoom) -> Array:
 			var room_rect = get_collision_rect(in_room)
 			var other_rect = get_collision_rect(area)
 			var intersection = intersection(room_rect, other_rect)
-			if(intersection.size.x >= cell_size() or intersection.size.y >= cell_size()):
+			if(intersection.size.x >= cell_size or intersection.size.y >= cell_size):
 				intersecting_rooms.push_back(area)
 	return intersecting_rooms
 	
