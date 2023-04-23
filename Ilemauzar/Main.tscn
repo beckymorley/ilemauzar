@@ -1,14 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Source/RoomGeneration/RoomGeneration.gd" type="Script" id=1]
 [ext_resource path="res://Source/DebugMenu/debug_menu.gd" type="Script" id=2]
 [ext_resource path="res://Source/DebugMenu/DebugItemDataGetter.gd" type="Script" id=3]
 [ext_resource path="res://Camera2D.gd" type="Script" id=4]
+[ext_resource path="res://Source/DebugMenu/ItemTypes/DebugMenuTitle.gd" type="Script" id=5]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.376471, 0.745098, 0.666667, 0.615686 )
+
+[sub_resource type="CanvasItemMaterial" id=3]
 
 [node name="Node2D" type="Node2D"]
 
@@ -43,22 +46,43 @@ menu_colour = Color( 0.376471, 0.745098, 0.666667, 0.615686 )
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/DebugMenu"]
 material = SubResource( 2 )
-margin_right = 40.0
-margin_bottom = 40.0
-size_flags_horizontal = 3
+margin_right = 100.0
+margin_bottom = 100.0
+size_flags_horizontal = 2
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 1 )
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/DebugMenu/PanelContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="OuterMarginContainer" type="MarginContainer" parent="CanvasLayer/DebugMenu/PanelContainer"]
+material = SubResource( 3 )
+margin_right = 100.0
+margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/DebugMenu/PanelContainer/MarginContainer"]
+[node name="OuterListContainer" type="VBoxContainer" parent="CanvasLayer/DebugMenu/PanelContainer/OuterMarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="DebugMenuTitle" type="Label" parent="CanvasLayer/DebugMenu/PanelContainer/OuterMarginContainer/OuterListContainer"]
+margin_right = 90.0
+margin_bottom = 14.0
+text = "Debug Menu"
+script = ExtResource( 5 )
+
+[node name="ItemMarginContainer" type="MarginContainer" parent="CanvasLayer/DebugMenu/PanelContainer/OuterMarginContainer/OuterListContainer"]
+margin_top = 18.0
+margin_right = 90.0
+margin_bottom = 90.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_left = 10
+
+[node name="ItemListContainer" type="VBoxContainer" parent="CanvasLayer/DebugMenu/PanelContainer/OuterMarginContainer/OuterListContainer/ItemMarginContainer"]
+margin_left = 10.0
+margin_right = 90.0
+margin_bottom = 72.0
+custom_constants/separation = 25
