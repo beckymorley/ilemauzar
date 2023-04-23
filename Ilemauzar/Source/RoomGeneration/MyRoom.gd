@@ -10,7 +10,7 @@ var debug_label
 var Fill
 var Outline
 var Size
-var Centre
+
 
 var UID
 
@@ -25,18 +25,9 @@ func init(size, location, fill_colour, outline_colour):
 	Fill = fill_colour
 	Outline = outline_colour
 	outline_set = []
-	update_position(location)
+	update_position(location, true )
 	init_collision(Size)
 	init_outline_set()
-
-func get_rect() -> Rect2:
-	var top_left = position - get_extents()
-	var top_right = position + Vector2(get_extents().x, 0)
-	var bottom_left = position - Vector2(0, get_extents().y)
-	var bottom_right = position + get_extents()
-	var rect_array = [top_left, top_right, bottom_left, bottom_right]
-	var rect = Rect2(position, get_extents())
-	return rect
 
 func init_collision(size):
 	collision_shape = CollisionShape2D.new()
@@ -116,15 +107,11 @@ func init_outline_set():
 		start = end
 		i+=1
 	
-func update_position(new_position):
-	position = new_position
-	
-	var Centre_x = position.x + (Size.x/2)
-	var Centre_y = position.y + (Size.y/2)
-	Centre = Vector2(Centre_x, Centre_y)
+func update_position(new_position : Vector2, position_at_centre: bool = false):
+	if(!position_at_centre):
+		position = new_position
+	else:
+		position = new_position - Size/2
 		
-func move(new_position : Vector2, tile_size : int = 1):
-	var new_x = position.x + round(new_position.x)*tile_size
-	var new_y = position.y + round(new_position.y)*tile_size
-	
-	update_position(Vector2(new_x, new_y))
+func get_centre():
+	return position + Size/2

@@ -52,3 +52,15 @@ static func are_rooms_intersecting(room: MyRoom, other_room : MyRoom, include_bo
 	
 	return room_rect.intersects(other_rect, include_borders)
 
+static func move_room(room : MyRoom, move_amount: Vector2) ->void: 
+	var new_x = room.position.x + round(move_amount.x)*cell_size
+	var new_y = room.position.y + round(move_amount.y)*cell_size
+	var new_pos = snap_vec_to_grid(Vector2(new_x, new_y))
+	
+	room.update_position(new_pos)
+
+static func snap_vec_to_grid(in_vec : Vector2)-> Vector2: 
+	var new_x = int(in_vec.x) - int(in_vec.x)%cell_size
+	var new_y = int(in_vec.y) - int(in_vec.y)%cell_size
+	
+	return Vector2(new_x, new_y)

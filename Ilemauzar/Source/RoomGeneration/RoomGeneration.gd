@@ -43,7 +43,8 @@ func _ready():
 	randomize()
 	register_emit_signals()
 	register_connect_signals()
-	Centre = Vector2(Radius*CellSize*2, Radius*CellSize*2)
+	Radius *= CellSize
+	Centre = Vector2(Radius, Radius)
 	debug_grid = Grid.new(CellSize, Vector2(Centre.x/CellSize*2, Centre.y/CellSize*2), Color(0.39, 0.39, 0.39))
 	add_child(debug_grid)
 	
@@ -52,14 +53,9 @@ func register_emit_signals():
 	GlobalSignal.add_emitter("grid_debug", self)
 
 func register_connect_signals():
-	GlobalSignal.add_listener("input_button_pressed", self, "_on_DebugInputButton_pressed")
 	GlobalSignal.add_listener("debug_toggled", self, "_on_DebugToggle_toggled")
 	GlobalSignal.add_listener("debug_button_pressed", self, "_on_DebugButton_pressed")
 	GlobalSignal.add_listener("struct_button_pressed", self, "_on_DebugStructButton_pressed")
-	
-func _on_DebugInputButton_pressed(debug_id: String, value):
-	if(debug_id == "generate_rooms"):
-		generate_room_set(value)
 	
 func _on_DebugToggle_toggled(debug_id : String, toggled):
 	if(debug_id == "radius_show"):
@@ -87,10 +83,12 @@ func _on_DebugStructButton_pressed(debug_id: String, in_struct: Array):
 		generate_room_set(NumberOfRooms)
 	
 func generate_random_rect():
-	var location = getRandomPointInCircle(Radius*CellSize) + Centre
 	var size = get_rand_vec2(RoomWidthRange, RoomHeightRange)
 	var scaled_size = scale_vec2_to_grid(size)
 	var new_rect = room_inst.instance()
+	var location = getRandomPointInCircle(Radius) + Centre
+	location -= Vector2(size.x/2, size.y/2)
+	location = snap_vec2_to_grid(location)
 	new_rect.init(scaled_size, location, RoomFillColour, RoomOutlineColour)
 	new_rect.init_debug(Grid.new(CellSize, size, Color(0.257, 0.251, 0.412)), show_debug_grid)
 	Rectangles.push_back(new_rect)
@@ -124,22 +122,6 @@ func print_toggle_state(name : String, state : bool) -> void:
 		state_string = "off"
 	print(name, ": ", state_string)
 	
-
-func get_rand_location_on_grid():
-	var location = get_rand_point_in_circle(Centre, Radius)
-	return snap_vec2_to_grid(location)
-
-func get_rand_rect_scaled_to_grid():
-	var size = get_rand_vec2(RoomWidthRange, RoomHeightRange)
-	return scale_vec2_to_grid(size)
-
-func get_rand_point_in_circle(centre, radius):
-	var r = radius * randf() /2 #divide by 2 so the point is in the inner circle
-	var theta = randf() * 2*PI
-	var pointX = centre.x + r * cos(theta)
-	var pointY = centre.y + r * sin(theta)
-	return Vector2(pointX, pointY)
-	
 func getRandomPointInCircle(radius):
 	var t = 2*PI*randf()
 	var u = 2* randf()
@@ -163,7 +145,7 @@ func scale_vec2_to_grid(vector):
 
 func _draw():
 	if(show_debug_circle):
-		draw_circle(Centre, Radius*CellSize, Color(0.255, 0.255, 0.255))
+		draw_circle(Centre, Radius, Color(0.255, 0.255, 0.255))
 
 var time =0
 
@@ -205,10 +187,10 @@ func separate_rooms(Rooms):
 			if(!RoomHelper.are_rooms_intersecting(room_inner, room_outer, false)):
 				continue
 			
-			var direction = (room_inner.Centre - room_outer.Centre).normalized()
+			var direction = (room_inner.get_centre() - room_outer.get_centre()).normalized()
 			
-			room_outer.move(-direction, CellSize)
-			room_inner.move(direction, CellSize)
+			RoomHelper.move_room(room_outer, -direction)
+			RoomHelper.move_room(room_inner, direction)
 	
 func clear_rooms():
 	for room in Rectangles:

@@ -6,6 +6,5 @@
 script = ExtResource( 1 )
 Radius = 30
 RoomFillColour = Color( 0.227451, 0.25098, 0.411765, 1 )
-CellSize = 8
 MeanWidth = 15
 MeanHeight = 15
