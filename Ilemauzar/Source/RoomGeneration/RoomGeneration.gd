@@ -39,7 +39,6 @@ onready var room_inst = preload("res://Source/RoomGeneration/MyRoom.tscn")
 
 export(int, 100) var NumberOfRooms = 10
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	register_emit_signals()
@@ -216,11 +215,3 @@ func clear_rooms():
 		room.queue_free()
 	Rectangles.clear()
 
-
-func cohere_rooms(Rooms):
-	#find centre point
-	#for each room
-		#if edge facing centre point is not touching another room
-			#move the room one cell toward the centre
-	#until all rooms are touching
-	pass
