@@ -138,15 +138,17 @@ func generate_items(parent):
 		if(item.type == ItemType.Type.TEXT_INPUT_STRUCT_BUTTON):
 			var struct_container = VBoxContainer.new()
 			parent.add_child(struct_container)
-			var child_items = get_child_items(item.string_id)
+			var child_item_ref = get_child_items(item.string_id)
+			var child_debug_ids : Array
+			for ref in child_item_ref:
+				child_debug_ids.push_back(ref)
 			var child_objects : Array
-			for child in child_items: 
-				var child_object = find_cache_item_by_debug_id(child)
-				remove_child_from_cache(child)
+			for child_id in child_debug_ids: 
+				var child_object = find_cache_item_by_debug_id(child_id)
 				child_objects.push_back(child_object)
+				remove_child_from_cache(child_id)
 			var struct_button = DebugDataStructButton.new(item.string_id, item.description, child_objects, parent)
 			item_list.push_back(struct_button)
-			#position += Vector2(0, 20)
 		if(item.type == ItemType.Type.ITEM_GROUP):
 			var item_group = DebugItemGroup.new(item.name, {} , position, true)
 			
@@ -155,8 +157,9 @@ func compare_parent_value_to_string(a, b):
 	
 func compare_children_values_to_string(a, b):
 	return a["children"].has(b)
+
 	
-func compare_string_to_debug_id(a, b):
+func compare_debug_id_to_string(a, b):
 	return a == b.debug_id
 
 func add_to_child_cache(child, parent_key_string):
@@ -171,9 +174,25 @@ func add_to_child_cache(child, parent_key_string):
 	child_item_cache.push_back(child)
 	
 func remove_child_from_cache(child_id : String):
-	#var result = child_item_dict.bsearch_custom(child_id, self "compare_children_values_to_string")
-	#if(result):
-	pass
+	var found_child
+	var found_child_idx
+	var index = -1
+	for item in child_item_cache:
+		index += 1
+		if(item.debug_id == child_id):
+			found_child = item
+			found_child_idx = index
+	if(found_child_idx > 0):
+		child_item_cache.remove(found_child_idx)
+	
+	var dict_idx = child_item_dict.bsearch_custom(child_id, self, "compare_children_values_to_string")
+	if(dict_idx >=0 && dict_idx <= child_item_dict.size()):
+		var dict_item = child_item_dict[dict_idx-1]		
+		if(dict_item):
+			var child_idx = dict_item["children"].find(child_id)
+			dict_item["children"].remove(child_idx)
+				
+		
 
 func get_child_items(parent_id : String): 
 	var result = child_item_dict.bsearch_custom(parent_id, self, "compare_key_to_string", true)
