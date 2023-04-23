@@ -4,7 +4,6 @@ class_name DebugMenuTitle
 
 var expand_icon : Image
 var expanded : bool
-var item_rect : Rect2
 
 signal title_expand_toggle(state)
 
