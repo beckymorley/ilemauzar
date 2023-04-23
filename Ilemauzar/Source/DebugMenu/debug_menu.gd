@@ -53,9 +53,7 @@ func _ready() -> void:
 	for item in item_list:
 		item_list_container.add_child(item)
 		
-	update_containers()
 	connect_signals()
-	update()
 	
 func connect_signals():
 	debug_title_item.connect("title_expand_toggle", self, "_on_DebugTitleExpand_toggled")
@@ -79,16 +77,6 @@ func create_container_outline(in_container, in_colour):
 	draw_line(position + Vector2(size.x, 0), position + size, in_colour)
 	draw_line(position + size, position + Vector2(0, size.y), in_colour)
 	draw_line(position + Vector2(0, size.y), position, in_colour)
-	
-func update_container(container : Container):
-	container.visible = false
-	container.call_deferred("set_visible", true)
-	
-func update_containers():
-	update_container(outer_menu_container)
-	update_container(outer_list_container)
-	update_container(item_margin_container)
-	update_container(item_list_container)
 
 func get_container_position(in_container: Container) -> Vector2:
 	return in_container.get_rect().position
